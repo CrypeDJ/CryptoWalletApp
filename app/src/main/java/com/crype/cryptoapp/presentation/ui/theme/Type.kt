@@ -1,10 +1,12 @@
-package com.crype.cryptoapp.ui.theme
+package com.crype.cryptoapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.crype.cryptoapp.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -31,4 +33,18 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+)
+
+val SFPro = FontFamily(
+    Font(R.font.sfprobold, FontWeight.Bold),
+    Font(R.font.sfprosemibold, FontWeight.SemiBold),
+    Font(R.font.sfpromedium, FontWeight.Medium),
+    Font(R.font.sfproregular, FontWeight.Normal)
+)
+
+val SFCompact = FontFamily(
+    Font(R.font.sfcompactbold, FontWeight.Bold),
+    Font(R.font.sfcompactsemibold, FontWeight.SemiBold),
+    Font(R.font.sfcompactmedium, FontWeight.Medium),
+    Font(R.font.sfcompactregular, FontWeight.Normal)
 )
