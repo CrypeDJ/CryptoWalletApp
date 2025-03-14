@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.crype.cryptoapp.presentation.component.BottomNavigation
 import com.crype.cryptoapp.presentation.component.TopBar
 import com.crype.cryptoapp.presentation.screen.StartScreen
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CryptoAppTheme {
+                val navController = rememberNavController()
                 Scaffold(
                     containerColor = Color.White,
                     topBar = {
@@ -33,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        BottomNavigation()
+                        BottomNavigation(navController)
                     }
                 ) {innerPadding ->
                     Box (

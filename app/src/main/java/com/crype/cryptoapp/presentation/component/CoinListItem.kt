@@ -61,11 +61,11 @@ fun CoinListItem(
             )
             Spacer(modifier = Modifier.padding(7.dp))
             Row(
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(
-                    //verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
@@ -84,7 +84,6 @@ fun CoinListItem(
                     )
                 }
                 Column(
-                    //verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(

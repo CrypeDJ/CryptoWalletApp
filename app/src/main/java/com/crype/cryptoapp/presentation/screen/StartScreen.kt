@@ -26,8 +26,8 @@ fun StartScreen(
     //navController: NavController
 ) {
     val walletBalance = CryptoValuesModel(
-        valueInCrypto = 0.1f,
-        valueInUSD = 0.6f,
+        valueInCrypto = 0f,
+        valueInUSD = 0f,
         coinInfo = CoinInfo.BTC,
         changesUSD = -1230f
     )
@@ -36,7 +36,7 @@ fun StartScreen(
             valueInCrypto = 4.4f,
             valueInUSD = 2345.4f,
             coinInfo = CoinInfo.BTC,
-            changesUSD = -1230f
+            changesUSD = 0f
         ),
         CryptoValuesModel(
             valueInCrypto = 4.4f,
