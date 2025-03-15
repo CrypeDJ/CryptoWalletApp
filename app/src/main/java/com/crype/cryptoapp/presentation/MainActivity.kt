@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.crype.cryptoapp.presentation.component.BottomNavigation
 import com.crype.cryptoapp.presentation.component.TopBar
+import com.crype.cryptoapp.presentation.screen.CoinDetailScreen
 import com.crype.cryptoapp.presentation.screen.StartScreen
 import com.crype.cryptoapp.presentation.ui.theme.CryptoAppTheme
 
@@ -43,7 +44,8 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                             .padding(horizontal = 15.dp)
                     ){
-                        StartScreen()
+                        CoinDetailScreen()
+                        //StartScreen()
                     }
                 }
             }

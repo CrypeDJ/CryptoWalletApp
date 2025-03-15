@@ -56,7 +56,8 @@ fun NotEmptyBalanceComponent(
                 fontFamily = SFPro,
                 fontSize = balanceChangeFontSize,
                 fontWeight = FontWeight.SemiBold,
-                color = Gray
+                color = Gray,
+                letterSpacing = 0.sp
             )
         }
         AddTransactionButton(

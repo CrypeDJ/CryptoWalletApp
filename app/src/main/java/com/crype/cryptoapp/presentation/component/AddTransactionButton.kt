@@ -73,7 +73,8 @@ fun AddTransactionButton(
                 fontFamily = SFPro,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
+                letterSpacing = 0.sp
             )
         }
     }

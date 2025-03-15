@@ -26,8 +26,8 @@ fun StartScreen(
     //navController: NavController
 ) {
     val walletBalance = CryptoValuesModel(
-        valueInCrypto = 0f,
-        valueInUSD = 0f,
+        valueInCrypto = 0.1f,
+        valueInUSD = 0.1f,
         coinInfo = CoinInfo.BTC,
         changesUSD = -1230f
     )
@@ -102,7 +102,7 @@ fun StartScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun StartScreenPreview() {
     StartScreen()

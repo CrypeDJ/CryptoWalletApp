@@ -10,6 +10,7 @@
     <string name="average_price">Average purchase price</string>
     <string name="current_price">Current price</string>
     <string name="replenishment">Replenishment</string>
+    <string name="withdrawal">Withdrawal</string>
     <string name="transaction">Transaction</string>
     <string name="cansel">Cansel</string>
     <string name="price_coin">Price coin</string>

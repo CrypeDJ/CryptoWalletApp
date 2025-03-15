@@ -4,6 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import com.crype.cryptoapp.presentation.ui.theme.Green
 import com.crype.cryptoapp.presentation.ui.theme.Red
 import com.crype.cryptoapp.presentation.ui.theme.SFPro
@@ -22,6 +23,7 @@ fun BalanceChange(
         color = if (isPlus) Green else Red,
         fontSize = fontSize,
         fontFamily = SFPro,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
+        letterSpacing = 0.sp
     )
 }
