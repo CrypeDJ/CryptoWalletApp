@@ -1,4 +1,4 @@
-package com.crype.cryptoapp.ui.theme
+package com.crype.cryptoapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
