@@ -28,10 +28,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.crype.cryptoapp.R
 import com.crype.cryptoapp.presentation.component.EnterValue
 import com.crype.cryptoapp.presentation.component.MainButton
 import com.crype.cryptoapp.presentation.component.PriceField
+import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.ui.theme.BackgroundBlock
 import com.crype.cryptoapp.presentation.ui.theme.Black
 import com.crype.cryptoapp.presentation.ui.theme.Blue
@@ -42,7 +44,7 @@ import com.crype.cryptoapp.presentation.ui.theme.White
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionScreen(
-
+    navController: NavController
 ) {
     var value by remember {
         mutableStateOf("")
@@ -98,19 +100,19 @@ fun AddTransactionScreen(
                 verticalPadding = 8.dp,
                 horizontalPadding = 0.dp
             ) {
-                
+                navController.popBackStack()
             }
             MainButton(
                 containerColor = Blue,
                 disabledContainerColor = DisableBlue,
                 textColor = White,
-                enabled = true,
+                enabled = value.isNotEmpty(),
                 modifier = Modifier.weight(1f),
                 text = stringResource(id = R.string.add),
                 verticalPadding = 8.dp,
                 horizontalPadding = 0.dp
             ) {
-
+                navController.navigate(route = Screens.HomeScreen.route)
             }
         }
     }
@@ -147,7 +149,7 @@ fun AddTransactionScreen(
                     verticalPadding = 8.dp,
                     horizontalPadding = 0.dp
                 ) {
-
+                    isBottomSheet = false
                 }
             }
         }

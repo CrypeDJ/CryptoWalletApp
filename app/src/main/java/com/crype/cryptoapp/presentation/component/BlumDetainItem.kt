@@ -21,24 +21,19 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.crype.cryptoapp.domain.model.CryptoValuesModel
+import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.presentation.ui.theme.BackgroundBlock
 import com.crype.cryptoapp.presentation.ui.theme.Black
 import com.crype.cryptoapp.presentation.ui.theme.Gray
-import com.crype.cryptoapp.presentation.ui.theme.Green
-import com.crype.cryptoapp.presentation.ui.theme.Red
 import com.crype.cryptoapp.presentation.ui.theme.SFCompact
 
 @Composable
-fun CoinListItem(
-    cryptoValuesModel: CryptoValuesModel,
+fun BlumItem(
     imageSize: Dp,
-    onClick: () -> Unit,
     titleSize: TextUnit,
     descSize: TextUnit,
 ) {
     Card(
-        onClick = onClick,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors().copy(
             containerColor = BackgroundBlock
@@ -51,7 +46,7 @@ fun CoinListItem(
                 .padding(horizontal = 13.dp, vertical = 8.dp)
         ) {
             Image(
-                painter = painterResource(id = cryptoValuesModel.coinInfo.coinImage),
+                painter = painterResource(id = CoinInfo.BLUM.coinImage),
                 contentDescription = null,
                 modifier = Modifier.size(imageSize)
             )
@@ -65,7 +60,7 @@ fun CoinListItem(
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = cryptoValuesModel.coinInfo.coinName,
+                        text = CoinInfo.BLUM.coinName,
                         color = Black,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -73,7 +68,7 @@ fun CoinListItem(
                         letterSpacing = 0.sp
                     )
                     Text(
-                        text = "${cryptoValuesModel.valueInCrypto} ${cryptoValuesModel.coinInfo.coinLetters}",
+                        text = "?",
                         color = Gray,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -81,29 +76,14 @@ fun CoinListItem(
                         letterSpacing = 0.sp
                     )
                 }
-                Column(
-                    horizontalAlignment = Alignment.End
-                ) {
-                    Text(
-                        text = "${cryptoValuesModel.valueInUSD} $",
-                        color = Black,
-                        fontFamily = SFCompact,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = titleSize,
-                        letterSpacing = 0.sp
-                    )
-                    if (cryptoValuesModel.changesUSD != 0f) {
-                        Text(
-                            text = if (cryptoValuesModel.changesUSD > 0) "+${cryptoValuesModel.changesUSD} $"
-                            else "${cryptoValuesModel.changesUSD} $",
-                            color = if (cryptoValuesModel.changesUSD > 0) Green else Red,
-                            fontFamily = SFCompact,
-                            fontWeight = FontWeight.Medium,
-                            fontSize = descSize,
-                            letterSpacing = 0.sp
-                        )
-                    }
-                }
+                Text(
+                    text = "?",
+                    color = Black,
+                    fontFamily = SFCompact,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = titleSize,
+                    letterSpacing = 0.sp
+                )
             }
         }
     }

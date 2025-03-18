@@ -14,16 +14,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.crype.cryptoapp.R
 import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.presentation.component.MainButton
 import com.crype.cryptoapp.presentation.component.SelectCoinItem
+import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.ui.theme.BackgroundBlock
 import com.crype.cryptoapp.presentation.ui.theme.Blue
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CoinSelectScreen(
-    //navController: NavController
+    navController: NavController,
+    viewModel: MainViewModel = koinViewModel()
 ) {
     val coins = listOf(CoinInfo.BTC, CoinInfo.ADA, CoinInfo.TON, CoinInfo.BLUM)
     Box(modifier = Modifier.fillMaxSize()) {
@@ -40,7 +45,8 @@ fun CoinSelectScreen(
                     spaceBetween = 8.dp,
                     coin = it,
                 ){
-
+                    viewModel.selectCoin(it)
+                    navController.navigate(route = Screens.AddTransactionScreen.route)
                 }
             }
         }
@@ -57,7 +63,7 @@ fun CoinSelectScreen(
             verticalPadding = 10.dp,
             horizontalPadding = 0.dp
         ) {
-
+            navController.navigate(route = Screens.HomeScreen.route)
         }
     }
 }

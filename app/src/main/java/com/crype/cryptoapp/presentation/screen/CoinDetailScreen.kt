@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.crype.cryptoapp.R
 import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.domain.model.CryptoValuesModel
@@ -33,15 +34,17 @@ import com.crype.cryptoapp.presentation.component.text.CenterText
 import com.crype.cryptoapp.presentation.ui.theme.Black
 import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.SFCompact
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CoinDetailScreen(
-    //navController: NavController
+    viewModel: MainViewModel = koinViewModel()
 ){
     val coinBalance = CryptoValuesModel(
         valueInCrypto = 0f,
         valueInUSD = 24715.63f,
-        coinInfo = CoinInfo.BTC,
+        coinInfo = viewModel.selectedCoin.value,
         changesUSD = 341.1f
     )
     val averagePrice = 79129.13f
@@ -136,10 +139,4 @@ fun CoinDetailScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Coinsdfsd(){
-    CoinDetailScreen()
 }

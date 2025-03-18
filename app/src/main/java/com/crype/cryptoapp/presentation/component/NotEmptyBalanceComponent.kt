@@ -1,11 +1,9 @@
 package com.crype.cryptoapp.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,7 +17,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.crype.cryptoapp.R
+import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.domain.model.CryptoValuesModel
 import com.crype.cryptoapp.presentation.component.text.BalanceChange
 import com.crype.cryptoapp.presentation.ui.theme.Gray
@@ -27,7 +27,6 @@ import com.crype.cryptoapp.presentation.ui.theme.SFPro
 
 @Composable
 fun NotEmptyBalanceComponent(
-    onClick: () -> Unit,
     coinList: List<CryptoValuesModel>,
     balanceChangeTopPadding: Dp,
     balanceChangeBottomPadding: Dp,
@@ -36,10 +35,12 @@ fun NotEmptyBalanceComponent(
     procent: Float,
     balanceChangeFontSize: TextUnit,
     spaceBetweenBalanceChange: Dp,
+    onCoinDetailClick: (CryptoValuesModel) -> Unit,
+    onAddClick: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-    ){
+    ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(spaceBetweenBalanceChange),
             modifier = Modifier
@@ -61,7 +62,7 @@ fun NotEmptyBalanceComponent(
             )
         }
         AddTransactionButton(
-            onClick = onClick,
+            onClick = onAddClick,
             iconSize = 20.dp,
             spaceBetween = 8.dp,
             verticalPadding = 15.dp,
@@ -71,15 +72,26 @@ fun NotEmptyBalanceComponent(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(coinList){
+            items(coinList) {
                 CoinListItem(
                     cryptoValuesModel = it,
                     imageSize = 40.dp,
                     titleSize = 18.sp,
                     descSize = 14.sp,
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onCoinDetailClick(it)
+                    },
                 )
-            } 
+            }
+            if (coinList.isNotEmpty()){
+                item {
+                    BlumItem(
+                        imageSize = 40.dp,
+                        titleSize = 18.sp,
+                        descSize = 14.sp,
+                    )
+                }
+            }
         }
     }
 }
