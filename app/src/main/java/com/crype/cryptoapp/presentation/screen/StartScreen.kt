@@ -31,8 +31,8 @@ fun StartScreen(
     viewModel: MainViewModel = koinViewModel()
 ) {
     val walletBalance = CryptoValuesModel(
-        valueInCrypto = 0.1f,
-        valueInUSD = 0.1f,
+        valueInCrypto = 0f,
+        valueInUSD = 0f,
         coinInfo = CoinInfo.BTC,
         changesUSD = -1230f
     )
