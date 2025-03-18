@@ -11,19 +11,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.crype.cryptoapp.R
 import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.domain.model.CryptoValuesModel
 import com.crype.cryptoapp.presentation.component.EmptyBalanceComponent
 import com.crype.cryptoapp.presentation.component.NotEmptyBalanceComponent
 import com.crype.cryptoapp.presentation.component.text.CenterText
+import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.ui.theme.Black
 import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.SFPro
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun StartScreen(
-    //navController: NavController
+    navController: NavController,
+    viewModel: MainViewModel = koinViewModel()
 ) {
     val walletBalance = CryptoValuesModel(
         valueInCrypto = 0.1f,
@@ -83,12 +88,11 @@ fun StartScreen(
                     imageHeight = 128.dp,
                     spaceBetween = 13.dp
                 ) {
-
+                    navController.navigate(route = Screens.CoinSelectScreen.route)
                 }
             }
         } else {
             NotEmptyBalanceComponent(
-                onClick = { /*TODO*/ },
                 coinList = coinList,
                 balanceChangeTopPadding = 0.dp,
                 balanceChangeBottomPadding = 30.dp,
@@ -96,14 +100,14 @@ fun StartScreen(
                 value = walletBalance.changesUSD,
                 procent = walletBalance.valueInUSD,
                 balanceChangeFontSize = 14.sp,
-                spaceBetweenBalanceChange = 5.dp
-            )
+                spaceBetweenBalanceChange = 5.dp,
+                onCoinDetailClick = {
+                    viewModel.selectCoin(it.coinInfo)
+                    navController.navigate(route = Screens.CoinDetailScreen.route)
+                }
+            ){
+                navController.navigate(route = Screens.CoinSelectScreen.route)
+            }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun StartScreenPreview() {
-    StartScreen()
 }

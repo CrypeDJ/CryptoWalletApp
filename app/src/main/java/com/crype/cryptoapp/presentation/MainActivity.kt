@@ -14,9 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.crype.cryptoapp.presentation.component.BottomNavigation
 import com.crype.cryptoapp.presentation.component.TopBar
+import com.crype.cryptoapp.presentation.navigation.NavGraph
+import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.screen.AddTransactionScreen
 import com.crype.cryptoapp.presentation.screen.CoinDetailScreen
 import com.crype.cryptoapp.presentation.screen.CoinSelectScreen
@@ -31,11 +34,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             CryptoAppTheme {
                 val navController = rememberNavController()
+                val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
                 Scaffold(
                     containerColor = Color.White,
                     topBar = {
                         TopBar(
-                            title = ""
+                            currentRoute = currentRoute,
+                            navController = navController,
                         )
                     },
                     bottomBar = {}
@@ -45,11 +50,10 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                             .padding(horizontal = 15.dp)
                     ){
-                        SettingScreen()
-                        //AddTransactionScreen()
-                        //CoinSelectScreen()
-                        //CoinDetailScreen()
-                        //StartScreen()
+                        NavGraph(
+                            navController = navController,
+                            startDestination = Screens.HomeScreen.route
+                        )
                     }
                 }
             }
