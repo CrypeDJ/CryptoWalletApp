@@ -17,4 +17,6 @@ val White = Color(0xFFFFFFFF)
 val Green = Color(0xFF71D65D)
 val Red = Color(0xFFF01C1C)
 val BackgroundGreen = Color(0xFFE1F7DC)
-
+val Blue = Color(0xFF1C73F0)
+val DisableBlue = Color(0x591C73F0)
+val HalfTransparent = Color(0x80000000)

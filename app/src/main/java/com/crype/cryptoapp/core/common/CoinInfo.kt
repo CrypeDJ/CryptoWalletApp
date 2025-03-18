@@ -10,5 +10,7 @@ enum class CoinInfo(
     BTC("Bitcoin", "BTC", R.drawable.bitcoin),
     ADA("ADA", "ADA", R.drawable.ada),
     TON("Toncoin", "TON", R.drawable.toncoin),
-    BLUM("BLUM", "BLUM", R.drawable.blum)
+    BLUM("Blum", "BLUM", R.drawable.blum)
+
+
 }

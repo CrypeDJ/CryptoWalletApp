@@ -17,7 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.crype.cryptoapp.presentation.component.BottomNavigation
 import com.crype.cryptoapp.presentation.component.TopBar
+import com.crype.cryptoapp.presentation.screen.AddTransactionScreen
 import com.crype.cryptoapp.presentation.screen.CoinDetailScreen
+import com.crype.cryptoapp.presentation.screen.CoinSelectScreen
+import com.crype.cryptoapp.presentation.screen.SettingScreen
 import com.crype.cryptoapp.presentation.screen.StartScreen
 import com.crype.cryptoapp.presentation.ui.theme.CryptoAppTheme
 
@@ -35,16 +38,17 @@ class MainActivity : ComponentActivity() {
                             title = ""
                         )
                     },
-                    bottomBar = {
-                        BottomNavigation(navController)
-                    }
+                    bottomBar = {}
                 ) {innerPadding ->
                     Box (
                         modifier = Modifier
                             .padding(innerPadding)
                             .padding(horizontal = 15.dp)
                     ){
-                        CoinDetailScreen()
+                        SettingScreen()
+                        //AddTransactionScreen()
+                        //CoinSelectScreen()
+                        //CoinDetailScreen()
                         //StartScreen()
                     }
                 }
