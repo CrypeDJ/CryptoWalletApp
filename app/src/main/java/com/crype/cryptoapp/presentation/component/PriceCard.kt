@@ -2,7 +2,6 @@ package com.crype.cryptoapp.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +21,8 @@ import com.crype.cryptoapp.presentation.ui.theme.BackgroundBlock
 import com.crype.cryptoapp.presentation.ui.theme.Black
 import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.SFCompact
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PriceCard(
@@ -31,6 +32,7 @@ fun PriceCard(
     spaceBetween: Dp,
     textSize: TextUnit,
     priceSize: TextUnit,
+    viewModel: MainViewModel = koinViewModel()
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -42,7 +44,9 @@ fun PriceCard(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(spaceBetween),
-            modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp)
         ) {
             Text(
                 text = stringResource(id = text),
@@ -53,7 +57,7 @@ fun PriceCard(
                 letterSpacing = 0.sp
             )
             Text(
-                text = "$price $",
+                text = "${viewModel.formatFloat(price, 2)} $",
                 fontSize = priceSize,
                 color = Black,
                 fontFamily = SFCompact,

@@ -14,24 +14,24 @@ import com.crype.cryptoapp.presentation.screen.StartScreen
 fun NavGraph(
     navController: NavHostController,
     startDestination: String
-){
+) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screens.HomeScreen.route){
+        composable(route = Screens.HomeScreen.route) {
             StartScreen(navController)
         }
-        composable(route = Screens.CoinDetailScreen.route){
+        composable(route = Screens.CoinDetailScreen.route) {
             CoinDetailScreen()
         }
-        composable(route = Screens.CoinSelectScreen.route){
+        composable(route = Screens.CoinSelectScreen.route) {
             CoinSelectScreen(navController)
         }
-        composable(route = Screens.AddTransactionScreen.route){
+        composable(route = Screens.AddTransactionScreen.route) {
             AddTransactionScreen(navController)
         }
-        composable(route = Screens.SettingScreen.route){
+        composable(route = Screens.SettingScreen.route) {
             SettingScreen()
         }
     }

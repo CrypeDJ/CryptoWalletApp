@@ -20,13 +20,13 @@ fun SettingScreen() {
             descText = stringResource(id = R.string.usd),
             fontSize = 18.sp,
             verticalPadding = 15.dp
-        ){}
+        ) {}
         SettingsItem(
             horizontalPadding = 15.dp,
             mainText = stringResource(id = R.string.theme),
             descText = stringResource(id = R.string.light),
             fontSize = 18.sp,
             verticalPadding = 15.dp
-        ){}
+        ) {}
     }
 }

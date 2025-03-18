@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -36,7 +35,7 @@ fun CoinSelectScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(top = 20.dp)
         ) {
-            items(coins){
+            items(coins) {
                 SelectCoinItem(
                     iconSize = 32.dp,
                     fontSize = 18.sp,
@@ -44,7 +43,7 @@ fun CoinSelectScreen(
                     horizontalPadding = 10.dp,
                     spaceBetween = 8.dp,
                     coin = it,
-                ){
+                ) {
                     viewModel.selectCoin(it)
                     navController.navigate(route = Screens.AddTransactionScreen.route)
                 }

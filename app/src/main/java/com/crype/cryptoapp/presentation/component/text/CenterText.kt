@@ -22,13 +22,13 @@ fun CenterText(
     fontWeight: FontWeight,
     fontSize: TextUnit,
     bottomPadding: Dp
-){
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = bottomPadding),
         contentAlignment = Alignment.Center,
-    ){
+    ) {
         Text(
             text = text,
             color = color,

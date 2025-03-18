@@ -8,6 +8,8 @@ import androidx.compose.ui.unit.sp
 import com.crype.cryptoapp.presentation.ui.theme.Green
 import com.crype.cryptoapp.presentation.ui.theme.Red
 import com.crype.cryptoapp.presentation.ui.theme.SFPro
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BalanceChange(
@@ -15,11 +17,12 @@ fun BalanceChange(
     value: Float,
     procent: Float,
     fontSize: TextUnit,
+    viewModel: MainViewModel = koinViewModel()
 ) {
     Text(
         text = if (isPlus)
-            "+${value} $ (+${procent} %)"
-        else "${value} $ (${procent} %)",
+            "+${viewModel.formatFloat(value, 2)} $ (+${viewModel.formatFloat(procent, 2)} %)"
+        else "${viewModel.formatFloat(value, 2)} $ (${viewModel.formatFloat(procent, 2)} %)",
         color = if (isPlus) Green else Red,
         fontSize = fontSize,
         fontFamily = SFPro,

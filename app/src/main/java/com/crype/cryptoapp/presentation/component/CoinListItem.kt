@@ -28,6 +28,8 @@ import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.Green
 import com.crype.cryptoapp.presentation.ui.theme.Red
 import com.crype.cryptoapp.presentation.ui.theme.SFCompact
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CoinListItem(
@@ -36,6 +38,7 @@ fun CoinListItem(
     onClick: () -> Unit,
     titleSize: TextUnit,
     descSize: TextUnit,
+    viewModel: MainViewModel = koinViewModel()
 ) {
     Card(
         onClick = onClick,
@@ -73,7 +76,12 @@ fun CoinListItem(
                         letterSpacing = 0.sp
                     )
                     Text(
-                        text = "${cryptoValuesModel.valueInCrypto} ${cryptoValuesModel.coinInfo.coinLetters}",
+                        text = "${
+                            viewModel.formatFloat(
+                                cryptoValuesModel.valueInCrypto,
+                                8
+                            )
+                        } ${cryptoValuesModel.coinInfo.coinLetters}",
                         color = Gray,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -85,7 +93,7 @@ fun CoinListItem(
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = "${cryptoValuesModel.valueInUSD} $",
+                        text = "${viewModel.formatFloat(cryptoValuesModel.valueInUSD, 2)} $",
                         color = Black,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -94,8 +102,13 @@ fun CoinListItem(
                     )
                     if (cryptoValuesModel.changesUSD != 0f) {
                         Text(
-                            text = if (cryptoValuesModel.changesUSD > 0) "+${cryptoValuesModel.changesUSD} $"
-                            else "${cryptoValuesModel.changesUSD} $",
+                            text = if (cryptoValuesModel.changesUSD > 0) "+${
+                                viewModel.formatFloat(
+                                    cryptoValuesModel.changesUSD,
+                                    2
+                                )
+                            } $"
+                            else "${viewModel.formatFloat(cryptoValuesModel.changesUSD, 2)} $",
                             color = if (cryptoValuesModel.changesUSD > 0) Green else Red,
                             fontFamily = SFCompact,
                             fontWeight = FontWeight.Medium,

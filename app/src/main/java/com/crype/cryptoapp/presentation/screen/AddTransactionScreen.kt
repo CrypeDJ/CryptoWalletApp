@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,9 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -116,9 +113,9 @@ fun AddTransactionScreen(
             }
         }
     }
-    if (isBottomSheet){
+    if (isBottomSheet) {
         ModalBottomSheet(
-            onDismissRequest = { isBottomSheet = false},
+            onDismissRequest = { isBottomSheet = false },
             shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
             containerColor = White,
             scrimColor = HalfTransparent,
@@ -136,7 +133,7 @@ fun AddTransactionScreen(
             ) {
                 price = it
             }
-            Box(modifier = Modifier.padding(vertical = 20.dp)){
+            Box(modifier = Modifier.padding(vertical = 20.dp)) {
                 MainButton(
                     containerColor = Blue,
                     disabledContainerColor = DisableBlue,

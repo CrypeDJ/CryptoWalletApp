@@ -8,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -66,7 +65,10 @@ fun StartScreen(
             bottomPadding = 5.dp
         )
         CenterText(
-            text = walletBalance.valueInUSD.toString() + " " + stringResource(id = R.string.usd),
+            text = viewModel.formatFloat(
+                walletBalance.valueInUSD,
+                0
+            ) + " " + stringResource(id = R.string.usd),
             color = Black,
             fontFamily = SFPro,
             fontWeight = FontWeight.SemiBold,
@@ -105,7 +107,7 @@ fun StartScreen(
                     viewModel.selectCoin(it.coinInfo)
                     navController.navigate(route = Screens.CoinDetailScreen.route)
                 }
-            ){
+            ) {
                 navController.navigate(route = Screens.CoinSelectScreen.route)
             }
         }

@@ -19,12 +19,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.crype.cryptoapp.R
-import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.domain.model.CryptoValuesModel
 import com.crype.cryptoapp.domain.model.TransactionModel
 import com.crype.cryptoapp.presentation.component.PriceCard
@@ -40,7 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CoinDetailScreen(
     viewModel: MainViewModel = koinViewModel()
-){
+) {
     val coinBalance = CryptoValuesModel(
         valueInCrypto = 0f,
         valueInUSD = 24715.63f,
@@ -66,7 +63,7 @@ fun CoinDetailScreen(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 15.dp)
-    ){
+    ) {
         Image(
             painter = painterResource(id = coinBalance.coinInfo.coinImage),
             contentDescription = null,
@@ -75,7 +72,7 @@ fun CoinDetailScreen(
         )
         Spacer(modifier = Modifier.padding(10.dp))
         CenterText(
-            text = "${coinBalance.valueInUSD} $",
+            text = "${viewModel.formatFloat(coinBalance.valueInUSD, 2)} $",
             color = Black,
             fontFamily = SFCompact,
             fontWeight = FontWeight.Medium,
