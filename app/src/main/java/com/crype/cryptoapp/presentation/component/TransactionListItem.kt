@@ -48,7 +48,7 @@ fun TransactionListItem(
     imageSize: Dp,
     titleSize: TextUnit,
     descSize: TextUnit,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -101,11 +101,7 @@ fun TransactionListItem(
                         letterSpacing = 0.sp
                     )
                     Text(
-                        text = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
-                            Date(
-                                transaction.date
-                            )
-                        ),
+                        text = viewModel.formatTimestampToDate(transaction.date),
                         color = Gray,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -116,7 +112,7 @@ fun TransactionListItem(
                 Text(
                     text = "${if (transaction.value > 0) "+" else ""}${
                         viewModel.formatFloat(
-                            transaction.value,
+                            transaction.value * transaction.coin.currentPrice,
                             2
                         )
                     } $",

@@ -9,27 +9,31 @@ import com.crype.cryptoapp.presentation.screen.CoinDetailScreen
 import com.crype.cryptoapp.presentation.screen.CoinSelectScreen
 import com.crype.cryptoapp.presentation.screen.SettingScreen
 import com.crype.cryptoapp.presentation.screen.StartScreen
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    startDestination: String
+    startDestination: String,
+    viewModel: MainViewModel
 ) {
+
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
         composable(route = Screens.HomeScreen.route) {
-            StartScreen(navController)
+            StartScreen(navController,viewModel)
         }
         composable(route = Screens.CoinDetailScreen.route) {
-            CoinDetailScreen()
+            CoinDetailScreen(viewModel)
         }
         composable(route = Screens.CoinSelectScreen.route) {
-            CoinSelectScreen(navController)
+            CoinSelectScreen(navController, viewModel)
         }
         composable(route = Screens.AddTransactionScreen.route) {
-            AddTransactionScreen(navController)
+            AddTransactionScreen(navController, viewModel)
         }
         composable(route = Screens.SettingScreen.route) {
             SettingScreen()

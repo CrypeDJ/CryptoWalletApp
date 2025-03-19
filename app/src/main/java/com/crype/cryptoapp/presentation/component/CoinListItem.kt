@@ -38,7 +38,7 @@ fun CoinListItem(
     onClick: () -> Unit,
     titleSize: TextUnit,
     descSize: TextUnit,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     Card(
         onClick = onClick,

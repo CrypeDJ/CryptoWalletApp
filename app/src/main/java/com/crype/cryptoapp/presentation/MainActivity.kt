@@ -17,6 +17,8 @@ import com.crype.cryptoapp.presentation.component.TopBar
 import com.crype.cryptoapp.presentation.navigation.NavGraph
 import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.ui.theme.CryptoAppTheme
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +29,14 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val currentRoute =
                     navController.currentBackStackEntryAsState().value?.destination?.route
+                val viewModel: MainViewModel = koinViewModel()
                 Scaffold(
                     containerColor = Color.White,
                     topBar = {
                         TopBar(
                             currentRoute = currentRoute,
                             navController = navController,
+                            viewModel = viewModel
                         )
                     },
                     bottomBar = {
@@ -49,7 +53,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         NavGraph(
                             navController = navController,
-                            startDestination = Screens.HomeScreen.route
+                            startDestination = Screens.HomeScreen.route,
+                            viewModel = viewModel
                         )
                     }
                 }

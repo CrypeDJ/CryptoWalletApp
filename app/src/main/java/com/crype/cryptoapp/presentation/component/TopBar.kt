@@ -37,7 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 fun TopBar(
     currentRoute: String?,
     navController: NavController,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors().copy(
@@ -46,9 +46,9 @@ fun TopBar(
         title = {
             currentRoute?.let { route ->
                 val screenTitle = when (route) {
-                    "coin_detail_screen" -> viewModel.selectedCoin.value.coinName
+                    "coin_detail_screen" -> viewModel.selectedCoin.value?.coinName
                     "coin_select_screen" -> stringResource(id = R.string.add_transaction)
-                    "add_transaction_screen" -> "Add ${viewModel.selectedCoin.value.coinName} transaction"
+                    "add_transaction_screen" -> "Add ${viewModel.selectedCoin.value?.coinName} transaction"
                     "settings_screen" -> stringResource(id = R.string.settings)
                     else -> null
                 }

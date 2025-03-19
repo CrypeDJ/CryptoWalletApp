@@ -1,5 +1,6 @@
 package com.crype.cryptoapp.presentation.screen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,20 +23,18 @@ import com.crype.cryptoapp.presentation.navigation.Screens
 import com.crype.cryptoapp.presentation.ui.theme.BackgroundBlock
 import com.crype.cryptoapp.presentation.ui.theme.Blue
 import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CoinSelectScreen(
     navController: NavController,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
-    val coins = listOf(CoinInfo.BTC, CoinInfo.ADA, CoinInfo.TON, CoinInfo.BLUM)
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(top = 20.dp)
         ) {
-            items(coins) {
+            items(CoinInfo.entries) {
                 SelectCoinItem(
                     iconSize = 32.dp,
                     fontSize = 18.sp,
@@ -45,6 +44,7 @@ fun CoinSelectScreen(
                     coin = it,
                 ) {
                     viewModel.selectCoin(it)
+                    Log.d("CoinSelectScreen", "Selected coin: ${it.coinName}")
                     navController.navigate(route = Screens.AddTransactionScreen.route)
                 }
             }

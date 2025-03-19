@@ -32,7 +32,7 @@ fun PriceCard(
     spaceBetween: Dp,
     textSize: TextUnit,
     priceSize: TextUnit,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),

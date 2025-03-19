@@ -17,7 +17,7 @@ fun BalanceChange(
     value: Float,
     procent: Float,
     fontSize: TextUnit,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     Text(
         text = if (isPlus)
