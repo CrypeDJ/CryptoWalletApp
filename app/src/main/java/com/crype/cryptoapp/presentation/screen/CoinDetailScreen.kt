@@ -13,20 +13,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.crype.cryptoapp.R
-import com.crype.cryptoapp.core.common.CoinInfo
-import com.crype.cryptoapp.domain.model.CryptoValuesModel
-import com.crype.cryptoapp.domain.model.TransactionModel
 import com.crype.cryptoapp.presentation.component.PriceCard
 import com.crype.cryptoapp.presentation.component.TransactionListItem
 import com.crype.cryptoapp.presentation.component.text.BalanceChange
@@ -39,43 +35,23 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CoinDetailScreen(
-    viewModel: MainViewModel = koinViewModel()
-){
-    val coinBalance = CryptoValuesModel(
-        valueInCrypto = 0f,
-        valueInUSD = 24715.63f,
-        coinInfo = viewModel.selectedCoin.value,
-        changesUSD = 341.1f
-    )
-    val averagePrice = 79129.13f
-    val currentPrice = 97673.84f
-    val transactionList = listOf(
-        TransactionModel(
-            date = 1000000000000,
-            value = 30.4f
-        ),
-        TransactionModel(
-            date = 1500000000000,
-            value = -30.4f
-        ),
-        TransactionModel(
-            date = 1099900000000,
-            value = 30.4f
-        )
-    )
+    viewModel: MainViewModel
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 15.dp)
-    ){
-        Image(
-            painter = painterResource(id = coinBalance.coinInfo.coinImage),
-            contentDescription = null,
-            modifier = Modifier
-                .size(80.dp)
-        )
+    ) {
+        viewModel.selectedCoin.collectAsState().value?.let {
+            Image(
+                painter = painterResource(id = it.coinImage),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(80.dp)
+            )
+        }
         Spacer(modifier = Modifier.padding(10.dp))
         CenterText(
-            text = "${coinBalance.valueInUSD} $",
+            text = "${viewModel.formatFloat(viewModel.calculateTotalCoin(), 2)} $",
             color = Black,
             fontFamily = SFCompact,
             fontWeight = FontWeight.Medium,
@@ -83,10 +59,11 @@ fun CoinDetailScreen(
             bottomPadding = 7.dp
         )
         BalanceChange(
-            isPlus = coinBalance.changesUSD > 0,
-            value = coinBalance.changesUSD,
-            procent = coinBalance.changesUSD,
-            fontSize = 14.sp
+            isPlus = viewModel.calculateTotalChangesCoin() > 0,
+            value = viewModel.calculateTotalChangesCoin(),
+            procent = viewModel.calculateTotalChangesProcentCoin(),
+            fontSize = 14.sp,
+            viewModel = viewModel
         )
         Spacer(modifier = Modifier.padding(10.dp))
         Row(
@@ -94,20 +71,24 @@ fun CoinDetailScreen(
         ) {
             PriceCard(
                 modifier = Modifier.weight(1f),
-                price = averagePrice,
+                price = viewModel.calculateAveragePurchasePrice(),
                 text = R.string.average_price,
                 spaceBetween = 3.dp,
                 textSize = 12.sp,
-                priceSize = 20.sp
+                priceSize = 20.sp,
+                viewModel = viewModel
             )
-            PriceCard(
-                modifier = Modifier.weight(1f),
-                price = currentPrice,
-                text = R.string.current_price,
-                spaceBetween = 3.dp,
-                textSize = 12.sp,
-                priceSize = 20.sp
-            )
+            viewModel.selectedCoin.collectAsState().value?.currentPrice?.let {
+                PriceCard(
+                    modifier = Modifier.weight(1f),
+                    price = it,
+                    text = R.string.current_price,
+                    spaceBetween = 3.dp,
+                    textSize = 12.sp,
+                    priceSize = 20.sp,
+                    viewModel = viewModel
+                )
+            }
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Box(
@@ -129,12 +110,13 @@ fun CoinDetailScreen(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(transactionList) {
+            items(viewModel.transactions) {
                 TransactionListItem(
                     transaction = it,
                     imageSize = 40.dp,
                     titleSize = 18.sp,
-                    descSize = 14.sp
+                    descSize = 14.sp,
+                    viewModel = viewModel
                 )
             }
         }

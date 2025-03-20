@@ -17,13 +17,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.crype.cryptoapp.R
-import com.crype.cryptoapp.core.common.CoinInfo
 import com.crype.cryptoapp.domain.model.CryptoValuesModel
 import com.crype.cryptoapp.presentation.component.text.BalanceChange
 import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.SFPro
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
 
 @Composable
 fun NotEmptyBalanceComponent(
@@ -33,6 +32,7 @@ fun NotEmptyBalanceComponent(
     isPlus: Boolean,
     value: Float,
     procent: Float,
+    viewModel: MainViewModel,
     balanceChangeFontSize: TextUnit,
     spaceBetweenBalanceChange: Dp,
     onCoinDetailClick: (CryptoValuesModel) -> Unit,
@@ -50,7 +50,8 @@ fun NotEmptyBalanceComponent(
                 isPlus = isPlus,
                 value = value,
                 procent = procent,
-                fontSize = balanceChangeFontSize
+                fontSize = balanceChangeFontSize,
+                viewModel = viewModel
             )
             Text(
                 text = stringResource(id = R.string.all_time),
@@ -78,12 +79,13 @@ fun NotEmptyBalanceComponent(
                     imageSize = 40.dp,
                     titleSize = 18.sp,
                     descSize = 14.sp,
+                    viewModel = viewModel,
                     onClick = {
                         onCoinDetailClick(it)
                     },
                 )
             }
-            if (coinList.isNotEmpty()){
+            if (coinList.isNotEmpty()) {
                 item {
                     BlumItem(
                         imageSize = 40.dp,

@@ -33,7 +33,7 @@ fun SelectCoinItem(
     spaceBetween: Dp,
     coin: CoinInfo,
     onClick: () -> Unit
-){
+) {
     Card(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors().copy(
@@ -42,7 +42,7 @@ fun SelectCoinItem(
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(spaceBetween),
             modifier = Modifier

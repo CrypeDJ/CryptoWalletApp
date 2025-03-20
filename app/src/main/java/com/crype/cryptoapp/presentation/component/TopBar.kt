@@ -2,7 +2,6 @@ package com.crype.cryptoapp.presentation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -14,10 +13,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 fun TopBar(
     currentRoute: String?,
     navController: NavController,
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel
 ) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors().copy(
@@ -49,9 +46,9 @@ fun TopBar(
         title = {
             currentRoute?.let { route ->
                 val screenTitle = when (route) {
-                    "coin_detail_screen" -> viewModel.selectedCoin.value.coinName
+                    "coin_detail_screen" -> viewModel.selectedCoin.value?.coinName
                     "coin_select_screen" -> stringResource(id = R.string.add_transaction)
-                    "add_transaction_screen" -> "Add ${viewModel.selectedCoin.value.coinName} transaction"
+                    "add_transaction_screen" -> "Add ${viewModel.selectedCoin.value?.coinName} transaction"
                     "settings_screen" -> stringResource(id = R.string.settings)
                     else -> null
                 }
@@ -70,7 +67,7 @@ fun TopBar(
         },
         navigationIcon = {
             if (currentRoute == Screens.CoinDetailScreen.route) {
-                Box(modifier = Modifier.padding(start = 10.dp)){
+                Box(modifier = Modifier.padding(start = 10.dp)) {
                     IconButton(
                         onClick = {
                             navController.popBackStack()

@@ -36,6 +36,11 @@ import com.crype.cryptoapp.presentation.ui.theme.Gray
 import com.crype.cryptoapp.presentation.ui.theme.Green
 import com.crype.cryptoapp.presentation.ui.theme.Red
 import com.crype.cryptoapp.presentation.ui.theme.SFCompact
+import com.crype.cryptoapp.presentation.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun TransactionListItem(
@@ -43,6 +48,7 @@ fun TransactionListItem(
     imageSize: Dp,
     titleSize: TextUnit,
     descSize: TextUnit,
+    viewModel: MainViewModel
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -95,7 +101,7 @@ fun TransactionListItem(
                         letterSpacing = 0.sp
                     )
                     Text(
-                        text = java.text.SimpleDateFormat("dd.MM.yyyy", java.util.Locale.getDefault()).format(java.util.Date(transaction.date)),
+                        text = viewModel.formatTimestampToDate(transaction.date),
                         color = Gray,
                         fontFamily = SFCompact,
                         fontWeight = FontWeight.Medium,
@@ -104,7 +110,12 @@ fun TransactionListItem(
                     )
                 }
                 Text(
-                    text = "${if (transaction.value > 0) "+" else ""}${transaction.value} $",
+                    text = "${if (transaction.value > 0) "+" else ""}${
+                        viewModel.formatFloat(
+                            transaction.value * transaction.coin.currentPrice,
+                            2
+                        )
+                    } $",
                     color = if (transaction.value > 0) Green else Red,
                     fontFamily = SFCompact,
                     fontWeight = FontWeight.Medium,

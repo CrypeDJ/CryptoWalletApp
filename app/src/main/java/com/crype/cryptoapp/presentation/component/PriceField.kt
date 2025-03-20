@@ -1,8 +1,5 @@
 package com.crype.cryptoapp.presentation.component
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -26,8 +23,7 @@ fun PriceField(
     value: String,
     modifier: Modifier,
     onValueChange: (String) -> Unit,
-
-){
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
